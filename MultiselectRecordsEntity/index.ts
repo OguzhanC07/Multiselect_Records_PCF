@@ -1,7 +1,7 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import MultiselectRecords  from './MultiselectRecords'
+import MultiselectRecords from './MultiselectRecords'
 import { MultiselectModel } from './Model/MultiselectRetrieveData';
 import { Utilities } from './Utilities/Utilities';
 export class MultiselectRecordsEntity implements ComponentFramework.StandardControl<IInputs, IOutputs> {
@@ -66,7 +66,6 @@ export class MultiselectRecordsEntity implements ComponentFramework.StandardCont
 	 */
 	public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement) {
 		// Add control initialization code
-
 		this._context = context;
 		this._container = container;
 		this._notifyOutputChanged = notifyOutputChanged;
@@ -89,7 +88,7 @@ export class MultiselectRecordsEntity implements ComponentFramework.StandardCont
 		this._entityRecordName = contextPage.entityTypeName;
 
 		this._isFake = false;
-	
+
 		this._populatedFieldVisible = this._context.parameters.populatedFieldVisible.raw || "False";
 		this.props.populatedFieldVisible = this._populatedFieldVisible == "True" ? true : false;
 
@@ -111,6 +110,31 @@ export class MultiselectRecordsEntity implements ComponentFramework.StandardCont
 	 */
 	public async updateView(context: ComponentFramework.Context<IInputs>): Promise<void> {
 		// Add code to update control view
+		this._context = context;
+		this._entityName = this._context.parameters.entityName.raw || "";
+		this._filter = this._context.parameters.filter.raw || "";
+		this._originalFilter = this._context.parameters.filter.raw || "";
+		this._isFetchXml = this._originalFilter.includes("fetch") ? true : false;
+		const columns: string = this._context.parameters.columns.raw?.trim() || "Name,name";
+		this.props.columns = Utilities.parseColumns(columns);
+		this.props.data = this._context.parameters.data.raw || "name";
+		this.props.attributeid = this._context.parameters.attributeid.raw || "accountid";
+		this._filterDynamicValues = this._context.parameters.filterDynamicValues.raw || "";
+		const contextPage = (context as any).page;
+		this._entityRecordId = contextPage.entityId || "";
+		this._entityRecordName = contextPage.entityTypeName;
+		this._isFake = false;
+		this._populatedFieldVisible = this._context.parameters.populatedFieldVisible.raw || "False";
+		this.props.populatedFieldVisible = this._populatedFieldVisible == "True" ? true : false;
+		this.props.logicalName = this._context.parameters.entityName.raw || "";
+		this.props.openWindow = this._context.parameters.openFormOptions.raw || "Pop up";
+		this._filterTags = this._context.parameters.filterTags.raw || "True";
+		this.props.filterTags = this._filterTags == "True" ? true : false;
+		this._numberOfRecordsToBeShown = this._context.parameters.recordsToBeReturned.raw || 50;
+		this.props.numberIfRecordsToBeShown = this._numberOfRecordsToBeShown;
+		const _isMultiple = this._context.parameters.isMultiple.raw || "True";
+		this.props.isMultiple = _isMultiple == "True" ? true : false;
+
 		this.props.inputValue = this._context.parameters.field.raw || null;
 		this.props.isControlDisabled = context.mode.isControlDisabled;
 		this.props.isControlVisible = context.mode.isVisible;

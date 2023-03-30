@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Stack, IDetailsRowProps, IRenderFunction, CommandBarButton, PrimaryButton, IIconProps, initializeIcons, Spinner, SpinnerSize, IconButton, TooltipHost } from '@fluentui/react';
+import { Stack, IDetailsRowProps, IRenderFunction, CommandBarButton, PrimaryButton, IIconProps, initializeIcons, IconButton, TooltipHost } from '@fluentui/react/lib';
 import { TextField } from '@fluentui/react/lib/TextField';
 import {
     DetailsList,
@@ -198,7 +198,7 @@ const MultiselectRecords = (props: IMultiselectProps) => {
             if (selectedItemsCopy.length > 0) {
                 selectedItemsCopy = selectedItemsCopy.filter((a: any, b: any) => selectedItemsCopy.indexOf(a) === b)
             }
-        } else if(props.isMultiple === false) {
+        } else if (props.isMultiple === false) {
             selectedItemsCopy = [item];
         }
         temporarySelectedItems = selectedItemsCopy;
@@ -278,7 +278,7 @@ const MultiselectRecords = (props: IMultiselectProps) => {
                         autoComplete="off"
                         styles={{ root: { flex: 1, position: 'relative', marginTop: 10 } }}
                         disabled={props.isControlDisabled}
-                        placeholder="Search..."
+                        placeholder="Kayıtları Arayın"
                         errorMessage={errorMessage}
                         onKeyUp={enterFilterRecords}
                         data-custom-id="search-custom-field"
@@ -332,7 +332,7 @@ const MultiselectRecords = (props: IMultiselectProps) => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', flex: 1, alignContent: 'space-between' }}>
                         <CommandBarButton
                             data-custom-id="button-custom-select-elements"
-                            iconProps={acceptIcon} text="Select Elements" onClick={setFieldValue} styles={{
+                            iconProps={acceptIcon} text="Seçili Kayıtları Ekle" onClick={setFieldValue} styles={{
                                 root: {
                                     flex: 1,
                                     padding: 10,
@@ -346,7 +346,7 @@ const MultiselectRecords = (props: IMultiselectProps) => {
 
                         <CommandBarButton
                             data-custom-id="button-custom-close"
-                            iconProps={clearIcon} text="Close" onClick={clearItems} styles={{
+                            iconProps={clearIcon} text="Kapat" onClick={clearItems} styles={{
                                 root: {
                                     flex: 1,
                                     padding: 10,
